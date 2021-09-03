@@ -18,4 +18,21 @@ export default function CreateBoard(row, col, bombs){
     // Lo pusheo dentro del array de board
     board.push(subCol);    
     }
+
+    // Bombas random
+    let bombsCount = 0;
+    while (bombsCount < bombs) {
+        // Funciones bombas random
+        let x = random(0, row - 1);
+        let y = random(0, col - 1);
+
+        // Ubicar las bombas
+        if (board[x][y].value === 0){
+            board[x][y].value = "X";
+            mineLocation.push([x, y]);
+            bombsCount++;
+        }
+    }
+
+    
 }
