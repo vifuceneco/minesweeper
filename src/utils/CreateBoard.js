@@ -34,5 +34,59 @@ export default function CreateBoard(row, col, bombs){
         }
     }
 
+    // Incremento el valor de las celdas, si tiene bomba agrego los numeros alrededor
+    for (let i = 0; i < row; i++){
+        for (let j = 0; j < col; j++){
+            if (board[i][j].value === "X"){
+                continue;
+            }
+            // Arriba (posicion 0,1)
+            if (i > 0 && board[i - 1][j].value === "X"){
+                board[i][j].value++;
+            }
+
+            // Arriba a la derecha (posicion 0,2)
+            if (i > 0 && j < col - 1 && board[i - 1][j + 1].value === "X"){
+                board[i][j].value++;
+            }
+
+            // Derecha (1,2)
+            if (j < col - 1 && board[i][j + 1].value === "X"){
+                board[i][j].value++;
+            }
+
+            // Abajo a la derecha(2,2)
+            if (i < row - 1 && j < col - 1 && board[i + 1][j + 1].value === "X"){
+                board[i][j].value++;
+            }
+            
+            // Abajo (2,1)
+            if (i < row - 1 && board[i + 1][j].value === "X") {
+                board[i][j].value++;
+            }
     
+            // Abajo a la izquierda (2,0)
+            if (i < row - 1 && j > 0 && board[i + 1][j - 1].value === "X") {
+                board[i][j].value++;
+            }
+        
+            // Izquierda (1,0)
+            if (j > 0 && board[i][j - 1].value === "X") {
+                board[i][j].value++;
+            }
+        
+            // Arriba a la izquierda (0,0)
+            if (i > 0 && j > 0 && board[i - 1][j - 1].value === "X") {
+                board[i][j].value++;
+            }
+        }
+        return {board, mineLocation};
+    };
+
+
+    // Generar valores random de x e y
+    function random(min = 0, max) {
+        // Minimo y maximo
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
 }
